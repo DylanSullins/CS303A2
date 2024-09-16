@@ -1,27 +1,63 @@
 #include <iostream>
-#include <stdexcept>
-#include "LinkedList.h"
+#include "LinkedList.h" // Include your LinkedList header
 
-int main()
-{
-    std::cout << "Implementation of a Linked List" << std::endl;
-    LinkedList<int>* lst = new LinkedList<int>;
-    std::cout << "Testing empty list construction: " << std::endl;
-    if (lst->getHead() == nullptr){
-        std::cout << "\tPassed empty head" << std::endl;
+int main() {
+    // Create an empty LinkedList
+    LinkedList<int> lst;
+
+    std::cout << "Created an empty LinkedList." << std::endl;
+
+    // Push elements to the front
+    lst.push_front(10);
+    lst.push_front(20);
+    lst.push_front(30);
+    std::cout << "After push_front(30), push_front(20), push_front(10): ";
+    lst.print();
+
+    // Push elements to the back
+    lst.push_back(40);
+    lst.push_back(50);
+    std::cout << "After push_back(40), push_back(50): ";
+    lst.print();
+
+    // Check the front and back elements
+    std::cout << "Front element: " << lst.front() << std::endl;
+    std::cout << "Back element: " << lst.back() << std::endl;
+
+    // Pop front and back elements
+    lst.pop_front();
+    std::cout << "After pop_front(): ";
+    lst.print();
+
+    lst.pop_back();
+    std::cout << "After pop_back(): ";
+    lst.print();
+
+    // Insert element at index 1
+    lst.insert(1, 25);
+    std::cout << "After insert(1, 25): ";
+    lst.print();
+
+    // Try popping from the empty list
+    try {
+        LinkedList<int> emptyList;
+        emptyList.pop_front();
+    } catch (const std::runtime_error& e) {
+        std::cout << "Caught exception on empty pop_front: " << e.what() << std::endl;
     }
-    if (lst->getTail() == nullptr){
-        std::cout << "\tPassed empty tail" << std::endl;
+
+    // Copy constructor test
+    LinkedList<int> copiedList(lst);
+    std::cout << "Copied list using copy constructor: ";
+    copiedList.print();
+
+    // Test iterators
+    std::cout << "Iterating through the list using iterators: ";
+    for (LinkedList<int>::iterator itr = lst.begin(); itr != lst.end(); ++itr) {
+        std::cout << *itr << " ";
     }
-    lst->insert(0,1);
-    lst->insert(1,2);
-    std::cout << lst->front() << "-" << lst->back() << std::endl;
-    lst->insert(1,3);
-    for (auto i = lst->begin(); i != lst->end(); ++i)
-    {
-        std::cout << *i << std::endl;
-    }
-    std::cout << lst->find(1) << "-" << lst->find(2) << "-" << lst->find(3) << std::endl;
-    lst->remove(1);
-    lst->print();
+    std::cout << std::endl;
+
+    // Destructor will be automatically called at the end of scope for each list
+    return 0;
 }

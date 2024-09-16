@@ -39,10 +39,10 @@ class LinkedList
             }
             else
             {
-                head = new Node(other.head->data);
+                head = new Node(other.getHead()->data);
 
                 Node* currentNewNode = head;
-                Node* currentOtherNode = other.head->next;
+                Node* currentOtherNode = other.getHead()->next;
 
                 while (currentOtherNode != nullptr)
                 {
@@ -53,7 +53,7 @@ class LinkedList
                     currentOtherNode = currentOtherNode->next;
                 }
                 tail = currentNewNode;
-                numItems = other.numItems;
+                numItems = other.getNumItems();
             }
         }
         ~LinkedList()
@@ -72,14 +72,14 @@ class LinkedList
             numItems = 0;
         }
 
-        const Node* getHead(){return head;}
-        const Node* getTail(){return tail;}
-        const int getNumItems(){return numItems;}
+        const Node* getHead() const{return head;}
+        const Node* getTail() const{return tail;}
+        const size_t getNumItems() const{return numItems;}
 
         void setHead(Node* newHead){head = newHead;}
         void setTail(Node* newTail){tail = newTail;}
 
-        const bool isEmpty(){return head == nullptr;}
+        const bool isEmpty() const{return head == nullptr;}
         void push_front(T item)
         {
             Node* addNode = new Node(item, head);
@@ -138,6 +138,7 @@ class LinkedList
                 currentNode = currentNode->next;
             }
             setTail(currentNode);
+            currentNode->next = nullptr;
             delete delNode;
             --numItems;
         }
