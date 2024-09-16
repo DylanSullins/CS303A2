@@ -6,40 +6,22 @@ int main()
 {
     std::cout << "Implementation of a Linked List" << std::endl;
     LinkedList<int>* lst = new LinkedList<int>;
+    std::cout << "Testing empty list construction: " << std::endl;
     if (lst->getHead() == nullptr){
-        std::cout << "Pass empty head" << std::endl;
+        std::cout << "\tPassed empty head" << std::endl;
     }
     if (lst->getTail() == nullptr){
-        std::cout << "Pass empty tail" << std::endl;
+        std::cout << "\tPassed empty tail" << std::endl;
     }
-
-    lst->push_front(10);
-    std::cout << lst->getNumItems() << std::endl;
-    lst->push_front(20);
-    std::cout << lst->getNumItems() << std::endl;
-    lst->push_back(30);
-    std::cout << lst->getNumItems() << std::endl;
-    std::cout << lst->getHead()->data << std::endl;
-    std::cout << lst->getHead()->next->data << std::endl;
-    std::cout << lst->getTail()->data << std::endl;
-    std::cout << std::endl;
-
-    lst->pop_back();
-    std::cout << lst->getNumItems() << std::endl;
-    std::cout << lst->getTail()->data << std::endl;
-    lst->pop_back();
-    std::cout << lst->back() << std::endl;
-    std::cout << lst->getNumItems() << std::endl;
-    lst->pop_back();
-    lst->push_back(10);
-    std::cout << lst->back() << std::endl;
-    try 
+    lst->insert(0,1);
+    lst->insert(1,2);
+    std::cout << lst->front() << "-" << lst->back() << std::endl;
+    lst->insert(1,3);
+    for (auto i = lst->begin(); i != lst->end(); ++i)
     {
-        lst->pop_back();
-        std::cout << lst->getNumItems() << std::endl;
+        std::cout << *i << std::endl;
     }
-    catch (std::runtime_error& e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+    std::cout << lst->find(1) << "-" << lst->find(2) << "-" << lst->find(3) << std::endl;
+    lst->remove(1);
+    lst->print();
 }

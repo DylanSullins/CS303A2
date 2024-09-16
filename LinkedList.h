@@ -143,6 +143,48 @@ class LinkedList
         }
         T& front(){return head->data;}
         T& back(){return tail->data;}
+
+        class iterator 
+        {
+            public:
+                Node* current;
+                iterator(typename LinkedList<T>::Node* position) : current(position) {}
+
+                T& operator*() const 
+                {
+                    if (current == nullptr)
+                        throw std::runtime_error("Attempting to dereference end()");
+                    return current->data;
+                }
+                T* operator->() const 
+                {
+                    if (current == nullptr)
+                        throw std::runtime_error("Attempt to dereference end()");
+                    return &(current->data);
+                }
+                iterator& operator++() 
+                {
+                    if (current == nullptr)
+                        throw std::runtime_error("Attempt to advance past end()");
+                    current = current->next;
+                    return *this;
+                }
+                iterator operator++(int) 
+                {
+                    iterator returnValue = *this;
+                    ++(*this);
+                    return returnValue;
+                }
+                bool operator==(const iterator& other) const
+                {
+                    return current == other.current;
+                }
+                bool operator!=(const iterator& other) const
+                {
+                    return current != other.current;
+                }
+        };
+
         void insert(size_t index, const T value)
         {
             if (index >= numItems) 
@@ -150,34 +192,85 @@ class LinkedList
                 push_back(value);
                 return;
             }
+            if (index == 0)
+            {
+                push_front(value);
+                return;
+            }
+            size_t count = 0;
+            iterator itr(head);
+            iterator prevItr = itr;
+
+            while (count < index)
+            {
+                prevItr = itr;
+                ++itr;
+                ++count;
+            }
             
+            Node* newNext = itr.current;
+            Node* addNode = new Node(value, newNext);
+            prevItr.current->next = addNode;
+            ++numItems;
         }
-        //bool remove(size_t index);
-        /*size_t find(const T& value) 
+        bool remove(size_t index)
+        {
+            if (index >= numItems)
+                throw std::out_of_range("Index out of range");
+            if (index == 0)
+            {
+                pop_front();
+                return true;
+            }
+            
+            size_t count = 0;
+            iterator itr(head);
+            iterator prevItr = itr;
+            
+            while (count < index) 
+            {
+                prevItr = itr;
+                ++itr;
+                ++count;
+            }
+            Node* delNode = itr.current;
+            prevItr.current->next = delNode->next;
+            if (delNode == tail)
+            {
+                setTail(prevItr.current);
+            }
+            delete delNode;
+            --numItems;
+            return true;
+        }
+        
+        size_t find(const T& value) 
         {
             if (isEmpty())
                 throw std::runtime_error("Attempting to search an empty list.");
             if (head->data == value)
                 return 0;
-            if (tail->data == value){}
-        }*/
+            size_t index = 0;
+            for (iterator itr = begin(); itr != end(); ++itr, ++index)
+            {
+                if (*itr == value)
+                {
+                    return index;
+                }
+            }
+            return numItems;
+        }
 
-};
+        iterator begin() {return iterator(head);}
+        iterator end() {return iterator(nullptr);}
 
-template <typename T>
-class iterator 
-{
-    friend class LinkedList<T>;
-    private:
-        LinkedList<T>* parent;
-        LinkedList<T>::Node* current;
-        iterator(LinkedList<T>* newParent, Node* position) :
-            parent(newParent), current(position) {}
-        
-        T& operator*() const 
+        void print() 
         {
-            if (current == nullptr)
-                throw std::runtime_error("Attempting to dereference end()");
-            return current->data;
+            for (iterator i = begin(); i != end(); ++i)
+            {
+                std::cout << *i;
+                if (i.current->next != nullptr) std::cout << " ==> ";
+                else std::cout << std::endl;
+            }
         }
 };
