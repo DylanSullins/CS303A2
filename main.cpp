@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LinkedList.h" // Include your LinkedList header
+#include "Stack.h"
 
 int main() {
     // Create an empty LinkedList
@@ -58,6 +59,20 @@ int main() {
     }
     std::cout << std::endl;
 
+    std::cout << "TESTING STACK IMPLEMENTATION" << std::endl;
+    Stack stk;
+    stk.push(1);
+    stk.push(2);
+    stk.push(3);
+    std::cout << stk.top() << std::endl;
+    stk.pop();
+    std::cout << stk.top() << std::endl;
+    stk.pop();
+    std::cout << stk.top() << std::endl;
+    stk.pop();
+    std::cout << stk.top() << std::endl;
+    stk.pop();
+    std::cout << stk.top() << std::endl;
     // Destructor will be automatically called at the end of scope for each list
     return 0;
 }
