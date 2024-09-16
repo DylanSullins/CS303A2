@@ -7,7 +7,7 @@ class Stack
     public:
     bool isEmpty();
     void push(int value);
-    int pop();
+    void pop();
     int top();
     int average();
 };
