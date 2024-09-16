@@ -3,76 +3,76 @@
 #include "Stack.h"
 
 int main() {
-    // Create an empty LinkedList
-    LinkedList<int> lst;
-
-    std::cout << "Created an empty LinkedList." << std::endl;
-
-    // Push elements to the front
-    lst.push_front(10);
-    lst.push_front(20);
-    lst.push_front(30);
-    std::cout << "After push_front(30), push_front(20), push_front(10): ";
-    lst.print();
-
-    // Push elements to the back
-    lst.push_back(40);
-    lst.push_back(50);
-    std::cout << "After push_back(40), push_back(50): ";
-    lst.print();
-
-    // Check the front and back elements
-    std::cout << "Front element: " << lst.front() << std::endl;
-    std::cout << "Back element: " << lst.back() << std::endl;
-
-    // Pop front and back elements
-    lst.pop_front();
-    std::cout << "After pop_front(): ";
-    lst.print();
-
-    lst.pop_back();
-    std::cout << "After pop_back(): ";
-    lst.print();
-
-    // Insert element at index 1
-    lst.insert(1, 25);
-    std::cout << "After insert(1, 25): ";
-    lst.print();
-
-    // Try popping from the empty list
-    try {
-        LinkedList<int> emptyList;
-        emptyList.pop_front();
-    } catch (const std::runtime_error& e) {
-        std::cout << "Caught exception on empty pop_front: " << e.what() << std::endl;
+    // DEMONSTRATION OF LINKED LIST
+    std::cout << "TESTING LINKED LIST" << std::endl;
+    std::cout << "\tCreating an empty list:" << std::endl;
+    LinkedList<int> list;
+    list.print();
+    std::cout << "\tPushing 20 to an empty list:" << std::endl;
+    list.push_back(20);
+    list.print();
+    std::cout << "\tPushing 10 front:" << std::endl;
+    list.push_front(10);
+    list.print();
+    std::cout << "\tPushing 30 back:" << std::endl;
+    list.push_back(30);
+    list.print();
+    std::cout << "\tFind 20:" << std::endl;
+    std::cout << list.find(20) << std::endl;
+    std::cout << "\tInserting 15 at index 1:" << std::endl;
+    list.insert(1,15);
+    list.print();
+    std::cout << "\tFront: " << list.front() << std::endl;
+    std::cout << "\tBack: " << list.back() << std::endl;
+    std::cout << "\tRemoving 15 by index (1):" << std::endl;
+    list.remove(1);
+    list.print();
+    std::cout << "\tPop_back until empty:" << std::endl;
+    list.pop_back();
+    list.print();
+    list.pop_back();
+    list.print();
+    list.pop_back();
+    list.print();
+    std::cout << "\tAttempt to pop_back on empty list:" << std::endl;
+    try
+    {
+        list.pop_back();
     }
-
-    // Copy constructor test
-    LinkedList<int> copiedList(lst);
-    std::cout << "Copied list using copy constructor: ";
-    copiedList.print();
-
-    // Test iterators
-    std::cout << "Iterating through the list using iterators: ";
-    for (LinkedList<int>::iterator itr = lst.begin(); itr != lst.end(); ++itr) {
-        std::cout << *itr << " ";
+    catch (std::runtime_error& e)
+    {
+        std::cout << "\t\tCaught an error: " << e.what() << std::endl;
     }
+    std::cout << "\tConcluding demonstration of linked list." << std::endl;
     std::cout << std::endl;
-
-    std::cout << "TESTING STACK IMPLEMENTATION" << std::endl;
-    Stack stk;
-    stk.push(1);
-    stk.push(2);
-    stk.push(3);
-    std::cout << stk.top() << std::endl;
-    stk.pop();
-    std::cout << stk.top() << std::endl;
-    stk.pop();
-    std::cout << stk.top() << std::endl;
-    stk.pop();
-    std::cout << stk.top() << std::endl;
-    stk.pop();
-    std::cout << stk.top() << std::endl;
-    // Destructor will be automatically called at the end of scope for each list
+    // DEMONSTRATION OF STACK
+    std::cout << "TESTING STACK" << std::endl;
+    std::cout << "\tCreating stack:" << std::endl;
+    Stack stack;
+    std::cout << "\tTesting empty stack:" << std::endl;
+    if (stack.isEmpty()) std::cout << "Empty Stack" << std::endl;
+    else std::cout << "Stack not empty" << std::endl;
+    std::cout << "\tPushing 4,5,6,7 to stack:" << std::endl;
+    stack.push(4);
+    stack.push(5);
+    stack.push(6);
+    stack.push(7);
+    std::cout << "\tAverage: " << stack.average() << std::endl;
+    std::cout << "\tTop: " << stack.top() << std::endl;
+    std::cout << "\tPopping: " << std::endl;
+    stack.pop();
+    std::cout << "\tAverage: " << stack.average() << std::endl;
+    std::cout << "\tTop: " << stack.top() << std::endl;
+    std::cout << "\tPopping: " << std::endl;
+    stack.pop();
+    std::cout << "\tAverage: " << stack.average() << std::endl;
+    std::cout << "\tTop: " << stack.top() << std::endl;
+    std::cout << "\tPopping: " << std::endl;
+    stack.pop();
+    std::cout << "\tAverage: " << stack.average() << std::endl;
+    std::cout << "\tTop: " << stack.top() << std::endl;
+    std::cout << "\tPopping: " << std::endl;
+    stack.pop();
+    std::cout << "\tAverage: " << stack.average() << std::endl;
     return 0;
 }

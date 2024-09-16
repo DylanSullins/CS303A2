@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "Stack.h"
 
 
@@ -15,6 +16,7 @@ void Stack::pop()
 }
 int Stack::top()
 {
+    if (isEmpty()) throw std::out_of_range("Error: Attempting to access empty stack.");
     return valuesVector.back();
 }
 int Stack::average()
