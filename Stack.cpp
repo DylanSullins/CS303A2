@@ -21,6 +21,7 @@ int Stack::top()
 }
 int Stack::average()
 {
+    if (isEmpty()) return 0;
     int total = 0;
     int count = valuesVector.size();
     for (int i = 0; i < count; ++i)
