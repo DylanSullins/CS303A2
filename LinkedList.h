@@ -31,7 +31,7 @@ class LinkedList
         }
         LinkedList(const LinkedList& other)
         {
-            if (other.isEmpty())
+            if (other.empty())
             {
                 head = nullptr;
                 tail = nullptr;
@@ -58,7 +58,7 @@ class LinkedList
         }
         ~LinkedList()
         {
-            if (isEmpty()){
+            if (empty()){
                 return;
             }
             Node* delNode = head;
@@ -79,11 +79,11 @@ class LinkedList
         void setHead(Node* newHead){head = newHead;}
         void setTail(Node* newTail){tail = newTail;}
 
-        const bool isEmpty() const{return head == nullptr;}
+        const bool empty() const{return head == nullptr;}
         void push_front(T item)
         {
             Node* addNode = new Node(item, head);
-            if (isEmpty()){
+            if (empty()){
                 setHead(addNode);
                 setTail(addNode);
                 ++numItems;
@@ -96,7 +96,7 @@ class LinkedList
         void push_back(T item)
         {
             Node* addNode = new Node(item);
-            if (isEmpty()){
+            if (empty()){
                 setHead(addNode);
                 setTail(addNode);
                 ++numItems;
@@ -109,18 +109,18 @@ class LinkedList
         }
         void pop_front()
         {
-            if (isEmpty())
+            if (empty())
                 throw std::runtime_error("Attempting to delete from empty list.");
             Node* delNode = head;
             setHead(head->next);
             delete delNode;
-            if (isEmpty())
+            if (empty())
                 setTail(nullptr);
             --numItems;
         }
         void pop_back()
         {
-            if (isEmpty())
+            if (empty())
                 throw std::runtime_error("Attempting to delete from empty list.");
             Node* delNode = tail;
             Node* currentNode = head;
@@ -247,7 +247,7 @@ class LinkedList
         
         size_t find(const T& value) 
         {
-            if (isEmpty())
+            if (empty())
                 throw std::runtime_error("Attempting to search an empty list.");
             if (head->data == value)
                 return 0;
