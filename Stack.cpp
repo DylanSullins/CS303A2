@@ -19,15 +19,14 @@ int Stack::top()
     if (isEmpty()) throw std::out_of_range("Error: Attempting to access empty stack.");
     return valuesVector.back();
 }
-int Stack::average()
+double Stack::average()
 {
     if (isEmpty()) return 0;
-    int total = 0;
+    double total = 0.0;
     int count = valuesVector.size();
     for (int i = 0; i < count; ++i)
     {
         total += valuesVector.at(i);
     }
-    return total / count;
-    // Returns an integer, check to see if it needs to be float instead
+    return total / static_cast<double>(count);
 }

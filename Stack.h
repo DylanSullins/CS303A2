@@ -9,5 +9,5 @@ class Stack
     void push(int value);
     void pop();
     int top();
-    int average();
+    double average();
 };
