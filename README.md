@@ -15,4 +15,4 @@ This project is a simple implementation of a singly-linked list and a simple sta
 * In a terminal, in the directory where you created your output file, run the command *"./output"*, where output is the filename for the executable you created.
 
 ## Screen Shots
-Screenshots are located in the ScreenShots directory.
+Screenshots are located in the Screenshots directory.
