@@ -73,14 +73,68 @@ class LinkedList
         }
 
         const Node* getHead() const{return head;}
+        	/*
+            Returns head node pointer
+            Parameters:
+                None
+
+            Returns:
+                Node* head
+            */
         const Node* getTail() const{return tail;}
+            /*
+            Returns tail node pointer
+            Parameters:
+
+            Returns:
+                Node* tail
+            */
         const size_t getNumItems() const{return numItems;}
+            /*
+            Returns number of items
+            Parameters:
+
+            Returns:
+                size_t numItems
+            */
 
         void setHead(Node* newHead){head = newHead;}
+            /*
+            Set head pointer to new node pointer
+            Parameters:
+                Node* newHead: new head pointer
+
+            Returns:
+                None
+            */
         void setTail(Node* newTail){tail = newTail;}
+            /*
+            Set tail pointer to new node pointer
+            Parameters:
+                Node* newHead: new head pointer
+
+            Returns:
+                None
+            */
 
         const bool empty() const{return head == nullptr;}
+            /*
+            Check for empty list
+            Parameters:
+                None
+
+            Returns:
+                bool 
+            */
         void push_front(T item)
+            /*
+            Push new item to front of list
+            Parameters:
+                T item: new type T item to add 
+
+            Returns:
+                None
+            */
         {
             Node* addNode = new Node(item, head);
             if (empty()){
@@ -94,6 +148,14 @@ class LinkedList
             return;
         }
         void push_back(T item)
+            /*
+            Push new item to back of list
+            Parameters:
+                T item: new type T item to add 
+
+            Returns:
+                None
+            */
         {
             Node* addNode = new Node(item);
             if (empty()){
@@ -108,6 +170,14 @@ class LinkedList
             return;
         }
         void pop_front()
+            /*
+            Pop item from front of list
+            Parameters:
+                None
+
+            Returns:
+                None
+            */
         {
             if (empty())
                 throw std::runtime_error("Attempting to delete from empty list.");
@@ -119,6 +189,14 @@ class LinkedList
             --numItems;
         }
         void pop_back()
+            /*
+            Pop item from back of list
+            Parameters:
+                None
+
+            Returns:
+                None
+            */
         {
             if (empty())
                 throw std::runtime_error("Attempting to delete from empty list.");
@@ -143,7 +221,23 @@ class LinkedList
             --numItems;
         }
         T& front(){return head->data;}
+            /*
+            Returns first piece of data in list
+            Parameters:
+                None
+
+            Returns:
+                T head->data
+            */
         T& back(){return tail->data;}
+            /*
+            Returns last piece of data in list
+            Parameters:
+                None 
+
+            Returns:
+                T tail->data
+            */
 
         class iterator 
         {
@@ -187,6 +281,15 @@ class LinkedList
         };
 
         void insert(size_t index, const T value)
+            /*
+            Insert value at given index. Not efficient.
+            Parameters:
+                size_t index: Index to insert at
+                T value: new type T item to add 
+
+            Returns:
+                None
+            */
         {
             if (index >= numItems) 
             {
@@ -215,6 +318,14 @@ class LinkedList
             ++numItems;
         }
         bool remove(size_t index)
+            /*
+            Remove item at given index
+            Parameters:
+                size_t index: Index to remove
+
+            Returns:
+                None
+            */
         {
             if (index >= numItems)
                 throw std::out_of_range("Index out of range");
@@ -246,6 +357,14 @@ class LinkedList
         }
         
         size_t find(const T& value) 
+            /*
+            Linear search through list from head-tail for value
+            Parameters:
+                T value: Value to find in list
+
+            Returns:
+                size_t index of found item
+            */
         {
             if (empty())
                 throw std::runtime_error("Attempting to search an empty list.");
@@ -266,6 +385,14 @@ class LinkedList
         iterator end() {return iterator(nullptr);}
 
         void print() 
+            /*
+            Print list with "==>" between each node
+            Parameters:
+                None
+
+            Returns:
+                None
+            */
         {
             for (iterator i = begin(); i != end(); ++i)
             {
